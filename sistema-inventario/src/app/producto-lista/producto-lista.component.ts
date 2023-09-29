@@ -3,7 +3,8 @@ import { Producto } from '../producto';
 import { ProductoService } from '../producto.service';
 
 @Component({
-  selector: 'app-producto-lista',
+
+    selector: 'router-outlet',
   templateUrl: './producto-lista.component.html',
 })
 
