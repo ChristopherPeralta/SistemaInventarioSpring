@@ -19,7 +19,6 @@ public class ProductoController {
     private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
 
     private ProductoService productoService;
-
     //http://localhost:8080/
     @GetMapping ("/productos")
     public ResponseEntity<List<Producto>> obtenerProductos(){
