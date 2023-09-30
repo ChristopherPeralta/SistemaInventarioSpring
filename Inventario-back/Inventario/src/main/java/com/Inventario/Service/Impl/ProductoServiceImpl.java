@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +21,13 @@ public class ProductoServiceImpl implements ProductoService {
 
     private ProductoRepository repository;
 
+    @Transactional(readOnly = true)
     @Override
     public ResponseEntity<List<Producto>> listarProductos() {
         return ResponseEntity.ok(repository.findAll());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public ResponseEntity<?> GetById(Integer id) {
         Optional<Producto> producto = repository.findById(id);
@@ -34,6 +37,7 @@ public class ProductoServiceImpl implements ProductoService {
         return ResponseEntity.badRequest().body("Error en la búsqueda de Id producto");
     }
 
+    @Transactional
     @Override
     public ResponseEntity<?> guardarProducto(Producto producto) {
         HashMap<String, Object> json = new HashMap<>();
@@ -47,6 +51,7 @@ public class ProductoServiceImpl implements ProductoService {
         return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
+    @Transactional
     @Override
     public ResponseEntity<?> eliminarProductoPorId(Integer idProducto) {
         return null;

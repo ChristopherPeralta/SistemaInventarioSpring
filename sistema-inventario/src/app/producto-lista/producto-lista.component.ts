@@ -4,7 +4,7 @@ import { ProductoService } from '../producto.service';
 
 @Component({
 
-    selector: 'router-outlet',
+    selector: 'app-producto-lista',
   templateUrl: './producto-lista.component.html',
 })
 

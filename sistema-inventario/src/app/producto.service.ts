@@ -3,7 +3,6 @@ import {HttpClient } from '@angular/common/http'
 import { Producto } from './producto';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +12,11 @@ export class ProductoService {
   constructor(private clienteHttp: HttpClient) { }
 
   obtenerProductoLista(): Observable<Producto[]>{
-      return this.clienteHttp.get<Producto[]>(this.urlBase);
-    }
+    return this.clienteHttp.get<Producto[]>(this.urlBase);
+  }
+
+  guardarProducto(producto:Producto): Observable<Object>{
+    return this.clienteHttp.post(this.urlBase, producto);
+  }
+
 }
