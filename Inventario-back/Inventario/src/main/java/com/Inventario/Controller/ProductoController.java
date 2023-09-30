@@ -23,7 +23,6 @@ public class ProductoController {
     @GetMapping ("/productos")
     public ResponseEntity<List<Producto>> obtenerProductos(){
         ResponseEntity<List<Producto>> productos = productoService.listarProductos();
-        logger.info("Productos obtenidos");
         return productos;
     }
 
