@@ -4,8 +4,6 @@ import com.Inventario.Entity.Producto;
 import com.Inventario.Repository.ProductoRepository;
 import com.Inventario.Service.ProductoService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowire;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,12 +27,9 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Transactional(readOnly = true)
     @Override
-    public ResponseEntity<?> GetById(Integer id) {
+    public ResponseEntity<String> GetById(Integer id) {
         Optional<Producto> producto = repository.findById(id);
-        if (producto.isPresent()){
-            return ResponseEntity.ok(producto.get());
-        }
-        return ResponseEntity.badRequest().body("Error en la búsqueda de Id producto");
+        return producto.map(value -> ResponseEntity.ok(String.valueOf(value))).orElseGet(() -> ResponseEntity.badRequest().body("Error en la búsqueda de Id producto"));
     }
 
     @Transactional

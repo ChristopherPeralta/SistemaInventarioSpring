@@ -9,7 +9,7 @@ public interface ProductoService {
 
     ResponseEntity<List<Producto>> listarProductos();
 
-    ResponseEntity<?>GetById(Integer id);
+    ResponseEntity<String> GetById(Integer id);
 
     ResponseEntity<?>guardarProducto(Producto producto);
 

@@ -31,4 +31,12 @@ public class ProductoController {
         logger.info("Producto a agregar:" + producto);
         return productoService.guardarProducto(producto);
     }
+
+    @GetMapping("/productos/{id}")
+    public ResponseEntity<ResponseEntity<String>> obtenerProductoPorId (@PathVariable int id){
+            ResponseEntity<String> producto = this.productoService.GetById(id);
+            return ResponseEntity.ok(producto);
+        }
+
 }
+
