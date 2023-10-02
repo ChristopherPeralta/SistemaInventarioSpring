@@ -19,4 +19,8 @@ export class ProductoService {
     return this.clienteHttp.post(this.urlBase, producto);
   }
 
+  GetById(id: number) {
+    return this.clienteHttp.get<Producto>(`${this.urlBase}/${id}`);
+  }
+
 }
