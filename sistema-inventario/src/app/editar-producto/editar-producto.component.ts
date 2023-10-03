@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Producto } from '../producto';
 import { ProductoService } from '../producto.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'app-editar-producto',
@@ -27,6 +28,25 @@ export class EditarProductoComponent {
     }
 
     onSubmit(){
+      this.editarProducto();
+    }
+
+    editarProducto(){
+      this.productoServicio.editarProducto(this.id, this.producto).pipe(
+        tap((data: any) =>{
+          console.log("producto editado: ", data);
+          this.irListaProducto();
+        }),
+        catchError((error: any) => {
+          console.log("error al editar producto: ", error);
+          throw error;
+        })
+      )
+      .subscribe();
+    }
+
+    irListaProducto(){
+      this.enrutador.navigate(['/productos']);
     }
     
 }
