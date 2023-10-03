@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -21,35 +20,27 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Transactional(readOnly = true)
     @Override
-    public ResponseEntity<List<Producto>> listarProductos() {
-        return ResponseEntity.ok(repository.findAll());
+    public List<Producto> listarProductos() {
+        return repository.findAll();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public ResponseEntity<String> GetById(Integer id) {
-        Optional<Producto> producto = repository.findById(id);
-        return producto.map(value -> ResponseEntity.ok(String.valueOf(value))).orElseGet(() -> ResponseEntity.badRequest().body("Error en la búsqueda de Id producto"));
+        public Producto GetById(Integer id) {
+        Producto producto = this.repository.findById(id).orElse(null);
+        return producto;
     }
 
     @Transactional
     @Override
-    public ResponseEntity<?> guardarProducto(Producto producto) {
-        HashMap<String, Object> json = new HashMap<>();
-
-        if(producto.getPrecio() < 0 || producto.getExistencia() < 0) {
-            json.put("mensaje", "Error: No se aceptan numeros negativos en Precio o Existencia");
-            return new ResponseEntity<>(json, HttpStatus.BAD_REQUEST);
-        }
-        json.put("mensaje","Producto registrado");
-        repository.save(producto);
-        return new ResponseEntity<>(json, HttpStatus.OK);
+    public void guardarProducto(Producto producto) {
+        this.repository.save(producto);
     }
 
     @Transactional
     @Override
-    public ResponseEntity<?> eliminarProductoPorId(Integer idProducto) {
-        return null;
+    public void eliminarProductoPorId(Integer id) {
+        this.repository.deleteById(id);
     }
 
 

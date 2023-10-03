@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface ProductoService {
 
-    ResponseEntity<List<Producto>> listarProductos();
+    public List<Producto> listarProductos();
 
-    ResponseEntity<String> GetById(Integer id);
+    public Producto GetById(Integer id);
 
-    ResponseEntity<?>guardarProducto(Producto producto);
+   public void guardarProducto(Producto producto);
 
-    ResponseEntity<?>eliminarProductoPorId(Integer idProducto);
+    public void eliminarProductoPorId(Integer idProducto);
 
 
 
