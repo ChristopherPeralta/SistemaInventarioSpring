@@ -2,6 +2,6 @@
 Sistema Simple de Inventario en Spring
 
 ## Tecnologias:
-- Front: Angular
+- Front: Angular, bootstrap
 - Back: Spring
 
